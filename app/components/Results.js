@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import {
-  FaCompass,
-  FaBriefcase,
-  FaUsers,
-  FaUserFriends,
-  FaUser,
-} from 'react-icons/fa';
 import Card from './Card';
+import ProfileList from './ProfileList';
 import { brawl } from '../utils/api';
 
 export default class Results extends Component {
@@ -62,34 +56,7 @@ export default class Results extends Component {
           href={winner.profile.html_url}
           name={winner.profile.login}
         >
-          <ul className="card-list">
-            <li>
-              <FaUser color="rgb(239, 115, 115)" size={22} />
-              {winner.profile.name}
-            </li>
-            {/* if user has their location filled out */}
-            {winner.profile.location && (
-              <li>
-                <FaCompass color="rgb(114, 115, 255)" size={22} />
-                {winner.profile.location}
-              </li>
-            )}
-            {/* if user has their company filled out */}
-            {winner.profile.company && (
-              <li>
-                <FaBriefcase color="#795548" size={22} />
-                {winner.profile.company}
-              </li>
-            )}
-            <li>
-              <FaUsers color="rgb(129, 195, 245)" size={22} />
-              {winner.profile.followers.toLocaleString()} followers
-            </li>
-            <li>
-              <FaUserFriends color="rgb(64, 183, 95)" size={22} />
-              {winner.profile.following.toLocaleString()} following
-            </li>
-          </ul>
+          <ProfileList profile={winner.profile} />
         </Card>
 
         {/* Loser */}
@@ -100,34 +67,7 @@ export default class Results extends Component {
           href={loser.profile.html_url}
           name={loser.profile.login}
         >
-          <ul className="card-list">
-            <li>
-              <FaUser color="rgb(239, 115, 115)" size={22} />
-              {loser.profile.name}
-            </li>
-            {/* if user has their location filled out */}
-            {loser.profile.location && (
-              <li>
-                <FaCompass color="rgb(114, 115, 255)" size={22} />
-                {loser.profile.location}
-              </li>
-            )}
-            {/* if user has their company filled out */}
-            {loser.profile.company && (
-              <li>
-                <FaBriefcase color="#795548" size={22} />
-                {loser.profile.company}
-              </li>
-            )}
-            <li>
-              <FaUsers color="rgb(129, 195, 245)" size={22} />
-              {loser.profile.followers.toLocaleString()} followers
-            </li>
-            <li>
-              <FaUserFriends color="rgb(64, 183, 95)" size={22} />
-              {loser.profile.following.toLocaleString()} following
-            </li>
-          </ul>
+          <ProfileList profile={loser.profile} />
         </Card>
       </div>
     );
