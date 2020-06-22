@@ -201,6 +201,10 @@ li {
   max-width: 200px;
 }
 
+.btn-bat-res {
+  padding: 10px 40px;
+}
+
 .btn-dark {
   color: #e6e6e6;
   background: #141414;

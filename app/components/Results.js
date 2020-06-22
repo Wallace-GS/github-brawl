@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Card from './Card';
 import ProfileList from './ProfileList';
+import Loading from './Loading';
 import { brawl } from '../utils/api';
 
 export default class Results extends Component {
@@ -39,7 +41,7 @@ export default class Results extends Component {
     const { winner, loser, error, loading } = this.state;
 
     if (loading === true) {
-      return <p>LOADING</p>;
+      return <Loading text="Brawling" />;
     }
 
     if (error) {
@@ -47,29 +49,43 @@ export default class Results extends Component {
     }
 
     return (
-      <div className="grid space-around container-sm">
-        {/* Winner */}
-        <Card
-          header={winner.score === loser.score ? 'Tie' : 'Winner'}
-          subheader={`Score: ${winner.score.toLocaleString()}`}
-          avatar={winner.profile.avatar_url}
-          href={winner.profile.html_url}
-          name={winner.profile.login}
-        >
-          <ProfileList profile={winner.profile} />
-        </Card>
+      <>
+        <div className="grid space-around container-sm">
+          {/* Winner */}
+          <Card
+            header={winner.score === loser.score ? 'Tie' : 'Winner'}
+            subheader={`Score: ${winner.score.toLocaleString()}`}
+            avatar={winner.profile.avatar_url}
+            href={winner.profile.html_url}
+            name={winner.profile.login}
+          >
+            <ProfileList profile={winner.profile} />
+          </Card>
 
-        {/* Loser */}
-        <Card
-          header={winner.score === loser.score ? 'Tie' : 'Winner'}
-          subheader={`Score: ${loser.score.toLocaleString()}`}
-          avatar={loser.profile.avatar_url}
-          href={loser.profile.html_url}
-          name={loser.profile.login}
+          {/* Loser */}
+          <Card
+            header={winner.score === loser.score ? 'Tie' : 'Winner'}
+            subheader={`Score: ${loser.score.toLocaleString()}`}
+            avatar={loser.profile.avatar_url}
+            href={loser.profile.html_url}
+            name={loser.profile.login}
+          >
+            <ProfileList profile={loser.profile} />
+          </Card>
+        </div>
+        <button
+          className="btn btn-dark btn-space btn-bat-res"
+          onClick={this.props.onReset}
         >
-          <ProfileList profile={loser.profile} />
-        </Card>
-      </div>
+          Reset
+        </button>
+      </>
     );
   }
 }
+
+Results.propTypes = {
+  playerOne: PropTypes.string.isRequired,
+  playerTwo: PropTypes.string.isRequired,
+  onReset: PropTypes.func.isRequired,
+};
