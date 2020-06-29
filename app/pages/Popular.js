@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LanguagesNav from './LanguagesNav';
-import Loading from './Loading';
-import ReposGrid from './ReposGrid';
+import LanguagesNav from '../components/LanguagesNav';
+import Loading from '../components/Loading';
+import ReposGrid from '../components/ReposGrid';
 import { fetchPopularRepos } from '../utils/api';
 
 export default class Popular extends Component {

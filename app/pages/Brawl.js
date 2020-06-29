@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Instructions from './Instructions';
-import PlayerInput from './PlayerInput';
-import PlayerPreview from './PlayerPreview';
-import Results from './Results';
+import Instructions from '../components/Instructions';
+import PlayerInput from '../components/PlayerInput';
+import PlayerPreview from '../components/PlayerPreview';
+import Results from '../components/Results';
 
 export default class Brawl extends Component {
   constructor(props) {
