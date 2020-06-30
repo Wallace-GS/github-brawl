@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import withHover from './withHover';
 
 const styles = {
   container: {
@@ -23,46 +24,58 @@ const styles = {
   },
 };
 
-export default class Tooltip extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hovering: false,
-    };
+// export default class Tooltip extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       hovering: false,
+//     };
 
-    this.mouseOver = this.mouseOver.bind(this);
-    this.mouseOut = this.mouseOut.bind(this);
-  }
+//     this.mouseOver = this.mouseOver.bind(this);
+//     this.mouseOut = this.mouseOut.bind(this);
+//   }
 
-  mouseOver() {
-    this.setState({
-      hovering: true,
-    });
-  }
+//   mouseOver() {
+//     this.setState({
+//       hovering: true,
+//     });
+//   }
 
-  mouseOut() {
-    this.setState({
-      hovering: false,
-    });
-  }
+//   mouseOut() {
+//     this.setState({
+//       hovering: false,
+//     });
+//   }
 
-  render() {
-    const { text, children } = this.props;
-    const { hovering } = this.state;
+//   render() {
+//     const { text, children } = this.props;
+//     const { hovering } = this.state;
 
-    return (
-      <div
-        onMouseOver={this.mouseOver}
-        onMouseOut={this.mouseOut}
-        style={styles.container}
-      >
-        {hovering && <div style={styles.tooltip}>{text}</div>}
-        {children}
-      </div>
-    );
-  }
+//     return (
+//       <div
+//         onMouseOver={this.mouseOver}
+//         onMouseOut={this.mouseOut}
+//         style={styles.container}
+//       >
+//         {hovering && <div style={styles.tooltip}>{text}</div>}
+//         {children}
+//       </div>
+//     );
+//   }
+// }
+
+function Tooltip({ text, children, hover }) {
+  return (
+    <div style={styles.container}>
+      {hover && <div style={styles.tooltip}>{text}</div>}
+      {children}
+    </div>
+  );
 }
 
 Tooltip.propTypes = {
   text: PropTypes.string.isRequired,
+  hover: PropTypes.bool.isRequired,
 };
+
+export default withHover(Tooltip, 'hover');
